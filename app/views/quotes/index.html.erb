@@ -1,11 +1,6 @@
 <%# gray-50 %>
 <%# gray-200 %>
 
-<div class="flex flex-col items-center justify-center">
-  <%= render partial: 'form' %>
-  <hr class="my-6 w-full border-gray-200 border-r"></hr>
-
-  <div class="border-2 border-dashed rounded-lg border-gray-200">
-    <%= render @quotes %>
-  </div>
+<div class="flex flex-col items-center justify-center gap-4 p-4 border-2 border-dashed border-gray-200 rounded-lg">
+  <%= render @quotes %>
 </div>

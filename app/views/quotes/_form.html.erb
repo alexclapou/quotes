@@ -1,4 +1,11 @@
-<%= form_with(model: @quote, class:'w-full flex justify-between') do |form|%>
-  <%= form.text_field :content, placeholder: "add task", class:'w-full mr-2' %>
-  <%= form.submit%>
+<%= form_with(model: @quote, class:'w-full flex justify-between items-center') do |form|%>
+  <%= form.text_field :content, placeholder: "add task", autofocus: true, class: 'p-4 w-full outline-red-700' %>
+  <div class="flex gap-4 mx-4">
+    <%= link_to quote_path(@quote), class: 'bg-gray-100 hover:text-red-700 p-2 hover:bg-gray-200 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
+      <%= inline_svg_tag 'icons/back.svg' %>
+    <% end %>
+    <%= button_tag :submit, class: 'bg-gray-100 hover:text-red-700 p-2 hover:bg-gray-200 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
+      <%= inline_svg_tag 'icons/save.svg' %>
+    <% end %>
+  </div>
 <% end %>

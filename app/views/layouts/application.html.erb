@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="turbo-prefetch" content="false">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -27,11 +29,15 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="flex flex-col justify-center items-center">
+  <body class="max-w-3xl mx-auto flex flex-col gap-10">
     <%= render partial: 'layouts/header' %>
-    <main>
+    <hr class="w-full border-gray-200 border-r"></hr>
+
+    <main class="mx-4">
       <%= yield %>
     </main>
+
+    <hr class="w-full border-gray-200 border-r"></hr>
     <%= render partial: 'layouts/footer' %>
   </body>
 </html>
