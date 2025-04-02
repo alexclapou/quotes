@@ -4,7 +4,6 @@ class QuotesController < ApplicationController
   before_action :load_quote, only: %w[show update edit destroy]
 
   def index
-    @quote = Quote.new
     @quotes = Quote.all
   end
 
