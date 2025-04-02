@@ -3,6 +3,9 @@
 
 <div class="flex flex-col items-center justify-center">
   <%= render partial: 'form' %>
+  <hr class="my-6 w-full border-gray-200 border-r"></hr>
 
-  <%= render @quotes %>
+  <div class="border-2 border-dashed rounded-lg border-gray-200">
+    <%= render @quotes %>
+  </div>
 </div>
