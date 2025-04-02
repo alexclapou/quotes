@@ -3,4 +3,6 @@
 class Quote < ApplicationRecord
   validates :content, presence: true
   validates :content, length: { maximum: 255 }
+
+  default_scope { order('created_at DESC') }
 end
