@@ -8,11 +8,12 @@ class QuotesController < ApplicationController
     @quotes = Quote.all
   end
 
-  def create
-    Quote.create!(quote_params)
+  def new
+    @quote = Quote.new
+  end
 
-    # TODO: just append the new quote
-    redirect_to quotes_path
+  def create
+    @quote = Quote.create!(quote_params)
   end
 
   def destroy
