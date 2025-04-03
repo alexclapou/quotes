@@ -15,7 +15,7 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
   def test_should_create_quote
     assert_difference('Quote.count') do
       params = { quote: { content: 'Quote' } }
-      post quotes_url, params:
+      post quotes_url, params: params, as: :turbo_stream
     end
 
     assert_response :success
