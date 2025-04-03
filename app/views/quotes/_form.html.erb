@@ -1,0 +1,25 @@
+<% placeholder = @quote.new_record? ? 'add quote' : 'edit quote' %>
+<%= form_with(model: @quote, class:'w-full flex justify-between items-center bg-gray-200 rounded-md') do |form|%>
+  <div class="w-full p-2">
+    <% @quote.errors.full_messages.each do |error| %>
+      <div class="font-black text-red-700">
+        <%= error%>
+      </div>
+    <% end %>
+    <%= form.text_field :content, placeholder: placeholder, autofocus: true, class: 'font-medium text-gray-700 rounded-md p-4 w-full outline-2 outline-gray-500 border-none' %>
+  </div>
+  <div class="flex gap-4 mx-4 p-2">
+    <% unless @quote.new_record? %>
+      <%= link_to quote_path(@quote), class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
+        <%= inline_svg_tag 'icons/back.svg' %>
+      <% end %>
+    <% else %>
+      <div class='bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' data-action="click->quotes#clearForm">
+        <%= inline_svg_tag 'icons/back.svg' %>
+      </div>
+    <% end %>
+    <%= button_tag :submit, class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
+      <%= inline_svg_tag 'icons/save.svg' %>
+    <% end %>
+  </div>
+<% end %>
