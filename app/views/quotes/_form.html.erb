@@ -1,8 +1,12 @@
 <%= form_with(model: @quote, class:'w-full flex justify-between items-center') do |form|%>
-  <%= form.text_field :content, placeholder: "add task", autofocus: true, class: 'p-4 w-full outline-red-700' %>
+  <%= form.text_field :content, placeholder: "add task", autofocus: true, class: 'font-medium text-gray-700 rounded-md p-4 w-full outline-red-700 bg-gray-200' %>
   <div class="flex gap-4 mx-4">
     <% unless @quote.new_record? %>
       <%= link_to quote_path(@quote), class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
+        <%= inline_svg_tag 'icons/back.svg' %>
+      <% end %>
+    <% else %>
+      <%= link_to cancel_quote_path, class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer', data: {turbo_frame: 'new_quote'} do %>
         <%= inline_svg_tag 'icons/back.svg' %>
       <% end %>
     <% end %>

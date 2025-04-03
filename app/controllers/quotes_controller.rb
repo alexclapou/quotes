@@ -25,6 +25,10 @@ class QuotesController < ApplicationController
     redirect_to quote_path(@quote)
   end
 
+  def cancel
+    render turbo_stream: turbo_stream.update('new_quote', '')
+  end
+
 private
 
   def load_quote
