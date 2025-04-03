@@ -6,7 +6,7 @@
     <%= link_to edit_quote_path(quote), class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
       <%= inline_svg_tag 'icons/edit.svg' %>
     <% end %>
-    <%= button_to quote_path(quote),method: :delete, class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
+    <%= button_to quote_path(quote), method: :delete, class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
       <%= inline_svg_tag 'icons/delete.svg' %>
     <% end %>
   </div>

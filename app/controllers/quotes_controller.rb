@@ -22,6 +22,8 @@ class QuotesController < ApplicationController
   end
 
   def destroy
+    return unless @quote
+
     @quote.destroy
   end
 
@@ -36,7 +38,8 @@ class QuotesController < ApplicationController
 private
 
   def load_quote
-    @quote = Quote.find(params[:id])
+    @quote_id = params[:id]
+    @quote = Quote.find_by(id: @quote_id)
   end
 
   def quote_params
