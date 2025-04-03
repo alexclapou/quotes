@@ -12,7 +12,13 @@ class QuotesController < ApplicationController
   end
 
   def create
-    @quote = Quote.create!(quote_params)
+    @quote = Quote.new(quote_params)
+
+    if @quote.save
+      flash[:notice] = 'todo succesfully created'
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -20,13 +26,11 @@ class QuotesController < ApplicationController
   end
 
   def update
-    @quote.update!(quote_params)
-
-    redirect_to quote_path(@quote)
-  end
-
-  def cancel
-    render turbo_stream: turbo_stream.update('new_quote', '')
+    if @quote.update(quote_params)
+      render @quote
+    else
+      render :edit
+    end
   end
 
 private
