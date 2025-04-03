@@ -69,3 +69,4 @@ end
 gem 'inline_svg'
 
 gem 'honeybadger'
+gem 'pg'
