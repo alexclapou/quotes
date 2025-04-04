@@ -1,4 +1,10 @@
-<%= turbo_stream.replace "rating_#{@quote_id}" do %>
-  <%= render partial: 'quotes/rating', locals:{quote: @quote}%>
-  <%= render_flash %>
-<%end%>
+<% if @quote %>
+  <%= turbo_stream.replace "rating_#{@quote_id}" do %>
+    <%= render partial: 'quotes/rating', locals:{quote: @quote}%>
+  <%end%>
+<% else %>
+  <%= turbo_stream.remove "quote_#{@quote_id}" %>
+<% end %>
+
+<%= render_flash %>
+<%= turbo_stream.replace "stats", render('stats') %>

@@ -1,0 +1,22 @@
+<%= turbo_frame_tag 'stats' do %>
+<div class="flex flex-col">
+  average rating
+  <%= button_to filter_path, params: {rating: @rating, content: @content, only_rated: @only_rated.present? ? @only_rated.nil? : true} do %>
+    <div class="<%=class_names('p-1 flex hover:bg-gray-200 rounded-md cursor-pointer', {'bg-gray-200': @only_rated})%>">
+      <%= inline_svg_tag 'icons/star.svg', class:'text-yellow-500 fill-yellow-500 w-10'%>
+      <div>
+        <p class="text-lg font-bold">
+        <% if Quote.where.not(rating:nil).count > 0 %>
+          <%= (Quote.pluck(:rating).compact.sum / Quote.where.not(rating:nil).count.to_f).round(1) %>/5
+        <% else%>
+          no ratings
+        <% end %>
+        </p>
+        <p class="text-xs">
+          <%= pluralize(Quote.count, 'quote')%>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<% end %>
