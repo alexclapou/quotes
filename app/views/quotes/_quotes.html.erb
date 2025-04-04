@@ -1,0 +1,4 @@
+<%= turbo_frame_tag 'quotes', class:' my-4 border border-dashed border-gray-200 rounded-md parent w-full flex flex-col items-center justify-center gap-4 p-4' do %>
+  <%= render @quotes %>
+  <%= render partial: 'empty_list' %>
+<% end %>

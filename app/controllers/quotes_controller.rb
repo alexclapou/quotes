@@ -4,34 +4,51 @@ class QuotesController < ApplicationController
   before_action :load_quote, only: %w[show update edit destroy]
 
   def index
-    @quotes = Quote.all
+    query = params[:query]
+    if query
+      @quotes = Quote.where('content ilike ?', "%#{query}%")
+      render partial: 'quotes'
+    else # this is root
+      @quotes = Quote.all
+    end
   end
 
   def new
     @quote = Quote.new
   end
 
+  def edit
+    return if @quote
+
+    flash.now[:alert] = 'quote does not exist anymore'
+  end
+
   def create
     @quote = Quote.new(quote_params)
 
     if @quote.save
-      flash[:notice] = 'todo succesfully created'
+      flash.now[:notice] = 'quote created succesfully'
     else
       render :new
     end
   end
 
   def destroy
+    flash.now[:notice] = 'quote removed successfully'
     return unless @quote
 
     @quote.destroy
   end
 
   def update
-    if @quote.update(quote_params)
-      render @quote
+    if @quote
+      if @quote.update(quote_params)
+        flash.now[:notice] = 'quote updated successfully'
+      else
+        render :edit
+      end
     else
-      render :edit
+      flash.now[:alert] = 'something went wrong.. please refresh and try again'
     end
   end
 
