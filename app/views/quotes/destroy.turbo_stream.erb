@@ -1,2 +1,3 @@
 <%= turbo_stream.remove "quote_#{@quote_id}" %>
+<%= turbo_stream.replace "stats", render('stats_frame') %>
 <%= render_flash %>
