@@ -4,7 +4,13 @@ class QuotesController < ApplicationController
   before_action :load_quote, only: %w[show update edit destroy]
 
   def index
-    @quotes = Quote.all
+    query = params[:query]
+    if query
+      @quotes = Quote.where('content ilike ?', "%#{query}%")
+      render partial: 'quotes'
+    else
+      @quotes = Quote.all
+    end
   end
 
   def new

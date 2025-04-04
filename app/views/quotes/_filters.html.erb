@@ -1,0 +1,8 @@
+<div class="border border-gray-200 border-dashed rounded-lg p-4" data-controller='filters'>
+  <label for="email" class=" relative block group">
+    <%= text_field_tag :email, nil, placeholder: 'search quote', class: 'outline outline-gray-200 rounded-md p-2 pl-10', data: {'filters-target':'search', action: 'input->filters#delayedSearch'} %>
+    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none ">
+      <%= inline_svg_tag('icons/search.svg', class: 'w-4') %>
+    </div>
+  </label>
+</div>
