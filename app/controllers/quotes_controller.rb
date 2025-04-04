@@ -8,7 +8,7 @@ class QuotesController < ApplicationController
     if query
       @quotes = Quote.where('content ilike ?', "%#{query}%")
       render partial: 'quotes'
-    else
+    else # this is root
       @quotes = Quote.all
     end
   end
