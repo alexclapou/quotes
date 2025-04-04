@@ -4,13 +4,7 @@ class QuotesController < ApplicationController
   before_action :load_quote, only: %w[show update edit destroy rate]
 
   def index
-    query = params[:query]
-    if query
-      @quotes = Quote.where('content ilike ?', "%#{query}%")
-      render partial: 'quotes'
-    else # this is root
-      @quotes = Quote.all
-    end
+    @quotes = Quote.all
   end
 
   def new
@@ -61,6 +55,35 @@ class QuotesController < ApplicationController
     end
   end
 
+  def filter
+    content = params[:content]
+    rating = params[:rating]
+    previous_rating = params[:previous_rating]
+
+    conditions = []
+    values = []
+
+    if content.present?
+      conditions << 'content ilike ?'
+      values << "%#{content}%"
+      @content = content
+    end
+
+    if rating.present? && previous_rating != rating
+      conditions << 'rating = ?'
+      values << rating
+      @rating = rating.to_i
+    end
+
+    @quotes = Quote.where(conditions.join(' AND '), *values)
+
+    flash[:notice] = if conditions.empty?
+                       'filters cleared successfully'
+                     else
+                       'filters applied successfully'
+                     end
+  end
+
 private
 
   def load_quote
@@ -69,6 +92,6 @@ private
   end
 
   def quote_params
-    params.expect(quote: [:content, :rating])
+    params.expect(quote: %i[content rating])
   end
 end
