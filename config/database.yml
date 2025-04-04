@@ -80,19 +80,19 @@ test:
 production:
   primary: &primary_production
     <<: *default
-    host: cek6h0n4ffe7ur.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com
-    database: dca857ti4lfd9g
-    username: u8v3rn58jsptsc
-    password: pc8684a4fc3d39dd61e57b9c3a3a04c855d9fe28ca1f7562ef3f97c1239c1da3c
+    host: c4ggdlb6n7njd4.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com
+    database: d64c4cnsebkhn6
+    username: uaqio5e1phns2k
+    password: p266549da41087623617690dc37ec86bbdb9627327b37b056cb07585ff59e71df
   cache:
     <<: *primary_production
-    database: dca857ti4lfd9g
+    database: d64c4cnsebkhn6
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: dca857ti4lfd9g
+    database: d64c4cnsebkhn6
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: dca857ti4lfd9g
+    database: d64c4cnsebkhn6
     migrations_paths: db/cable_migrate
