@@ -59,6 +59,7 @@ class QuotesController < ApplicationController
     content = params[:content]
     rating = params[:rating]
     previous_rating = params[:previous_rating]
+    @only_rated = params[:only_rated] == 'true'
 
     conditions = []
     values = []
@@ -76,8 +77,9 @@ class QuotesController < ApplicationController
     end
 
     @quotes = Quote.where(conditions.join(' AND '), *values)
+    @quotes = @quotes.where.not(rating: nil) if @only_rated
 
-    flash[:notice] = if conditions.empty?
+    flash[:notice] = if conditions.empty? && !@only_rated
                        'filters cleared successfully'
                      else
                        'filters applied successfully'

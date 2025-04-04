@@ -2,9 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="filters"
 export default class extends Controller {
-  static targets = ['searchForm']
+  static targets = ["searchForm"]
 
   connect() {
+    if (!this.hasSearchFormTarget) return
+
     const input = this.searchFormTarget.querySelector("input[type='text']");
 
     if (input && input.value.trim() !== "") {
