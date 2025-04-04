@@ -10,9 +10,6 @@
       <%= inline_svg_tag 'icons/delete.svg' %>
     <% end %>
   </div>
-  <div class='rating absolute -bottom-2 flex flex-row-reverse'>
-    <% 5.times do %>
-      <%= inline_svg_tag 'icons/star.svg', class:'peer peer-hover:fill-yellow-500 hover:fill-yellow-500 cursor-pointer fill-gray-200 w-6' %>
-    <% end%>
-  </div>
+
+  <%= render partial:'rating', locals: {quote:quote} %>
 <% end %>

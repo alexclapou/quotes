@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuotesController < ApplicationController
-  before_action :load_quote, only: %w[show update edit destroy]
+  before_action :load_quote, only: %w[show update edit destroy rate]
 
   def index
     query = params[:query]
@@ -52,6 +52,15 @@ class QuotesController < ApplicationController
     end
   end
 
+  def rate
+    if @quote
+      @quote.update(quote_params)
+      flash.now[:notice] = 'quote rated successfully'
+    else
+      flash.now[:alert] = 'something went wrong.. please refresh and try again'
+    end
+  end
+
 private
 
   def load_quote
@@ -60,6 +69,6 @@ private
   end
 
   def quote_params
-    params.expect(quote: [:content])
+    params.expect(quote: [:content, :rating])
   end
 end

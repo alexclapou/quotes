@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "rating_#{quote.id}", class:'rating absolute -bottom-2 flex flex-row-reverse ' do %>
+  <% (1..5).reverse_each do |rating| %>
+    <%# button creates a form.. cannot properly style that %>
+    <%= link_to rate_path(quote, quote:{rating:}), data: { turbo_method: "post" }, class: 'peer peer-hover:[&>*]:fill-yellow-500 hover:[&>*]:fill-yellow-500' do %>
+      <%= inline_svg_tag 'icons/star.svg', class: class_names('fill-gray-200 w-6', {'star fill-yellow-500': rating <= (quote.rating || 0)}) %>
+    <% end %>
+  <% end%>
+<% end %>
