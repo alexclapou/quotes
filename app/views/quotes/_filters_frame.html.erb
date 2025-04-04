@@ -1,7 +1,0 @@
-<%= turbo_frame_tag 'filters', class:'flex flex-wrap gap-4 items-center', data: {controller:'filters'} do %>
-  <%= render partial: 'content_filter' %>
-  <div class="flex items-center gap-4">
-    <%= render partial: 'rating_filter' %>
-    <%= button_to 'clear filters',filter_path, class:'cursor-pointer font-bold hover:underline' %>
-  </div>
-<% end %>

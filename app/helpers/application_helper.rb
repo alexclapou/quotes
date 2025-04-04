@@ -2,6 +2,6 @@
 
 module ApplicationHelper
   def render_flash
-    turbo_stream.update 'flash', render('layouts/flash')
+    turbo_stream.replace 'flash', render('layouts/flash')
   end
 end

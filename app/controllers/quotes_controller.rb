@@ -3,6 +3,7 @@
 class QuotesController < ApplicationController
   before_action :load_quote, only: %w[show update edit destroy rate]
 
+  # root only!
   def index
     @quotes = Quote.all
   end
@@ -27,13 +28,6 @@ class QuotesController < ApplicationController
     end
   end
 
-  def destroy
-    flash.now[:notice] = 'quote removed successfully'
-    return unless @quote
-
-    @quote.destroy
-  end
-
   def update
     if @quote
       if @quote.update(quote_params)
@@ -44,6 +38,13 @@ class QuotesController < ApplicationController
     else
       flash.now[:alert] = 'something went wrong.. please refresh and try again'
     end
+  end
+
+  def destroy
+    flash.now[:notice] = 'quote removed successfully'
+    return unless @quote
+
+    @quote.destroy
   end
 
   def rate

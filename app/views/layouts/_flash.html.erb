@@ -1,11 +1,12 @@
-<div class="<%= class_names("flex gap-2 bg-gray-200 px-4 py-1 rounded-sm items-center", {'bg-green-300': flash[:notice].present?, 'bg-red-300': flash[:alert].present?})%>" data-controller='flash' data-flash-target='container'>
-  <% if flash[:notice]%>
-    <%= inline_svg_tag 'icons/notice.svg' %>
-    <%= flash[:notice]%>
-  <% end %>
+<% type = (flash[:notice].present? && 'notice') || (flash[:alert].present? && 'alert') || nil %>
+<% custom_bg = (type == 'notice' && 'bg-green-300') || (type == 'alert' && 'bg-red-300') || '' %>
 
-  <% if flash[:alert]%>
-    <%= inline_svg_tag 'icons/alert.svg' %>
-    <%= flash[:alert]%>
+<div id='flash'
+     class="<%= "justify-center items-center absolute top-14 flex gap-2 px-4 py-1 rounded-sm items-center #{custom_bg}" %>"
+     data-controller='flash'
+     data-flash-target='container'>
+  <% if flash[type]%>
+    <%= inline_svg_tag "icons/#{type}.svg" %>
+    <%= flash[type]%>
   <% end %>
 </div>
