@@ -1,1 +1,2 @@
 <%= turbo_stream.remove "quote_#{@quote_id}" %>
+<%= turbo_stream.update "flash", render('layouts/flash') %>

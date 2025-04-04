@@ -27,9 +27,22 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <style>
+      div:empty,
+      turbo-frame:empty {
+        display: none;
+      }
+
+      #quotes .empty:not(:nth-child(1)) {
+        display: none;
+      }
+    </style>
   </head>
 
   <body class="max-w-3xl mx-auto flex flex-col gap-6 bg-white">
+    <div id='flash'></div>
+
     <%= render partial: 'layouts/header' %>
 
     <main class="mx-4">

@@ -11,11 +11,17 @@ class QuotesController < ApplicationController
     @quote = Quote.new
   end
 
+  def edit
+    return if @quote
+
+    flash.now[:alert] = 'quote does not exist anymore..'
+  end
+
   def create
     @quote = Quote.new(quote_params)
 
     if @quote.save
-      flash[:notice] = 'todo succesfully created'
+      flash.now[:notice] = 'todo created succesfully'
     else
       render :new
     end
@@ -25,13 +31,18 @@ class QuotesController < ApplicationController
     return unless @quote
 
     @quote.destroy
+    flash.now[:notice] = 'quote removed successfully'
   end
 
   def update
-    if @quote.update(quote_params)
-      render @quote
+    if @quote
+      if @quote.update(quote_params)
+        flash.now[:notice] = 'quote updated successfully'
+      else
+        render :edit
+      end
     else
-      render :edit
+      flash.now[:alert] = 'something went wrong.. please refresh and try again'
     end
   end
 
