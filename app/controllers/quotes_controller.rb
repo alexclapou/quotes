@@ -42,6 +42,7 @@ class QuotesController < ApplicationController
 
   def destroy
     flash.now[:notice] = 'quote removed successfully'
+    # simulate a delete
     return unless @quote
 
     @quote.destroy
@@ -57,34 +58,10 @@ class QuotesController < ApplicationController
   end
 
   def filter
-    content = params[:content]
-    rating = params[:rating]
-    previous_rating = params[:previous_rating]
-    @only_rated = params[:only_rated] == 'true'
+    finder = Quotes::Finder.new(params)
 
-    conditions = []
-    values = []
-
-    if content.present?
-      conditions << 'content ilike ?'
-      values << "%#{content}%"
-      @content = content
-    end
-
-    if rating.present? && previous_rating != rating
-      conditions << 'rating = ?'
-      values << rating
-      @rating = rating.to_i
-    end
-
-    @quotes = Quote.where(conditions.join(' AND '), *values)
-    @quotes = @quotes.where.not(rating: nil) if @only_rated
-
-    flash[:notice] = if conditions.empty? && !@only_rated
-                       'filters cleared successfully'
-                     else
-                       'filters applied successfully'
-                     end
+    @quotes = finder.apply_criteria
+    @content, @rating, @only_rated = *finder.applied_criteria
   end
 
 private
