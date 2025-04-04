@@ -1,4 +1,4 @@
-<%= turbo_frame_tag dom_id(quote), class:'w-full flex justify-between items-center rounded-md bg-gray-200' do %>
+<%= turbo_frame_tag dom_id(quote), class:'w-full flex justify-between items-center rounded-md bg-gray-200 relative' do %>
   <div class="p-4 truncate w-full font-medium">
     <%= quote.content %>
   </div>
@@ -9,5 +9,10 @@
     <%= button_to quote_path(quote), method: :delete, class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
       <%= inline_svg_tag 'icons/delete.svg' %>
     <% end %>
+  </div>
+  <div class='rating absolute -bottom-2 flex flex-row-reverse'>
+    <% 5.times do %>
+      <%= inline_svg_tag 'icons/star.svg', class:'peer peer-hover:fill-yellow-500 hover:fill-yellow-500 cursor-pointer fill-gray-200 w-6' %>
+    <% end%>
   </div>
 <% end %>
