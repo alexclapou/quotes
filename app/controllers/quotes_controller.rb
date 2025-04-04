@@ -14,24 +14,24 @@ class QuotesController < ApplicationController
   def edit
     return if @quote
 
-    flash.now[:alert] = 'quote does not exist anymore..'
+    flash.now[:alert] = 'quote does not exist anymore'
   end
 
   def create
     @quote = Quote.new(quote_params)
 
     if @quote.save
-      flash.now[:notice] = 'todo created succesfully'
+      flash.now[:notice] = 'quote created succesfully'
     else
       render :new
     end
   end
 
   def destroy
+    flash.now[:notice] = 'quote removed successfully'
     return unless @quote
 
     @quote.destroy
-    flash.now[:notice] = 'quote removed successfully'
   end
 
   def update

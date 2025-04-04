@@ -1,9 +1,11 @@
-<% classes = flash[:notice] ? 'success' : 'error' %>
-<div>
+<div class="<%= class_names("flex gap-2 bg-gray-200 px-4 py-1 rounded-sm", {'bg-green-300': flash[:notice].present?, 'bg-red-300': flash[:alert].present?})%>" data-controller='flash' data-flash-target='container'>
   <% if flash[:notice]%>
+    <%= inline_svg_tag 'icons/notice.svg' %>
     <%= flash[:notice]%>
   <% end %>
+
   <% if flash[:alert]%>
+    <%= inline_svg_tag 'icons/alert.svg' %>
     <%= flash[:alert]%>
   <% end %>
 </div>

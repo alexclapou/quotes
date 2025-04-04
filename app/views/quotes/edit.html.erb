@@ -2,6 +2,6 @@
   <% if @quote.present? %>
     <%= render partial: 'form' %>
   <% else %>
-    <%= turbo_stream.update "flash", render('layouts/flash') %>
+    <%= render_flash %>
   <% end %>
 <% end %>
