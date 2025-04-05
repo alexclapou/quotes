@@ -8,7 +8,7 @@
 
 Rails.application.configure do
   config.content_security_policy do |policy|
-    policy.frame_ancestors 'https://your-root-app.com'
+    policy.frame_ancestors 'https://pecaiet.ro', 'http://localhost:5173/'
 
     #     policy.default_src :self, :https
     #     policy.font_src    :self, :https, :data
