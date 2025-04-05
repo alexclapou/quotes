@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Quotes
   class Stats
     def self.calculate
@@ -21,7 +23,7 @@ module Quotes
     end
 
     def self.required?(action_name)
-      %w[index create destroy rate].include?(action_name)
+      %w[index create destroy rate filter].include?(action_name)
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Quotes
   class Finder
     def initialize(options)

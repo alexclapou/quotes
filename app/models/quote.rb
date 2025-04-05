@@ -8,13 +8,12 @@ class Quote < ApplicationRecord
 
   before_save :delete_rating_if_need
 
-  private
+private
 
   # remove rating if click old rating star
   # we update rating only on index > click star
   # safe to assume !changes[:content]
   def delete_rating_if_need
-    self.rating = nil if self.rating == rating_was && !changes[:content]
+    self.rating = nil if rating == rating_was && !changes[:content]
   end
-
 end
