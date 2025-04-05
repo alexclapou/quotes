@@ -3,6 +3,7 @@
 class Quote < ApplicationRecord
   validates :content, presence: true
   validates :content, length: { maximum: 255 }
+  validates :rating, inclusion: { in: 1..5, message: 'must be between 1 and 5' }, allow_nil: true
 
   default_scope { order('created_at DESC') }
 
