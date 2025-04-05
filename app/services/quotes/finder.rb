@@ -26,12 +26,12 @@ module Quotes
         @rating = @rating.to_i
       end
 
-      @rating = nil if @previous_rating == @rating && @rating.present?
-
       Quote.where(conditions.join(' and '), *values)
     end
 
     def applied_criteria
+      @rating = nil if @previous_rating == @rating && @rating.present?
+
       [@content, (@rating.present? && @rating.to_i) || nil, @only_rated]
     end
   end

@@ -2,6 +2,9 @@
 
 class QuotesController < ApplicationController
   before_action :load_quote, only: %w[show update edit destroy]
+  before_action :load_filters, only: %w[edit update filter]
+
+  helper_method :filters_applied?
 
   # root only!
   def index
@@ -17,7 +20,7 @@ class QuotesController < ApplicationController
 
     if @quote.save
       flash.now[:notice] = 'quote created succesfully'
-      filter # maybe this can be done better
+      @quotes = Quote.all
     else
       render :new
     end
@@ -26,6 +29,7 @@ class QuotesController < ApplicationController
   def update
     if @quote.update(quote_params)
       flash.now[:notice] = 'quote updated successfully'
+      @quotes = @finder.apply_criteria if filters_applied?
     elsif params[:rating].blank?
       render :edit
     else
@@ -39,10 +43,7 @@ class QuotesController < ApplicationController
   end
 
   def filter
-    finder = Quotes::Finder.new(params)
-
-    @quotes = finder.apply_criteria
-    @content, @rating, @only_rated = *finder.applied_criteria
+    @quotes = @finder.apply_criteria
   end
 
   def render *args
@@ -51,6 +52,16 @@ class QuotesController < ApplicationController
   end
 
 private
+
+  def load_filters
+    @finder = Quotes::Finder.new(params)
+
+    @content, @rating, @only_rated = *@finder.applied_criteria
+  end
+
+  def filters_applied?
+    params[:content].present? || params[:rating].present? || params[:only_rated].present?
+  end
 
   def load_quote
     @quote = Quote.find_by(id: params[:id])

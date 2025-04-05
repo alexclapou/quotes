@@ -1,5 +1,9 @@
 <% placeholder = @quote.new_record? ? 'add quote' : 'edit quote' %>
 <%= form_with(model: @quote, class:'w-full flex justify-between items-center bg-gray-200 rounded-md') do |form|%>
+  <%= hidden_field_tag :content, @content %>
+  <%= hidden_field_tag :rating, @rating %>
+  <%= hidden_field_tag :only_rated, @only_rated %>
+
   <div class="w-full p-2">
     <% @quote.errors.full_messages.each do |error| %>
       <div class="font-black text-red-700">
