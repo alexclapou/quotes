@@ -20,7 +20,7 @@ class QuotesController < ApplicationController
 
     if @quote.save
       flash.now[:notice] = 'quote created succesfully'
-      @quotes = Quote.all
+      @quotes = Quote.all if filters_applied?
     else
       render :new
     end
@@ -55,7 +55,6 @@ private
 
   def load_filters
     @finder = Quotes::Finder.new(params)
-
     @content, @rating, @only_rated = *@finder.applied_criteria
   end
 

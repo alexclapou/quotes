@@ -3,5 +3,6 @@
 <% else %>
   <%= turbo_stream.replace @quote %>
 <% end %>
+
 <%= turbo_stream.replace "filters_stats", render('filters_stats') %>
 <%= render_flash %>
