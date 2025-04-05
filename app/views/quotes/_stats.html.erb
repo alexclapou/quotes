@@ -6,14 +6,10 @@
         <%= inline_svg_tag 'icons/star.svg', class:'text-yellow-500 fill-yellow-500 w-10'%>
         <div>
           <p class="text-lg font-bold">
-          <% if Quote.where.not(rating:nil).count > 0 %>
-            <%= (Quote.pluck(:rating).compact.sum / Quote.where.not(rating:nil).count.to_f).round(1) %>/5
-          <% else%>
-            no ratings
-          <% end %>
+            <%= @average_rating %>
           </p>
           <p class="text-xs">
-            <%= pluralize(Quote.count, 'quote')%>
+            <%= pluralize(@quotes_count, 'quote')%>
           </p>
         </div>
       </div>

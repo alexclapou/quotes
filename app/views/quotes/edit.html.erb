@@ -1,7 +1,3 @@
-<%= turbo_frame_tag "quote_#{@quote_id}" do %>
-  <% if @quote.present? %>
-    <%= render partial: 'form' %>
-  <% else %>
-    <%= render_flash %>
-  <% end %>
+<%= turbo_frame_tag @quote do %>
+  <%= render partial: 'form' %>
 <% end %>

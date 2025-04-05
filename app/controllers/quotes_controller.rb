@@ -12,12 +12,6 @@ class QuotesController < ApplicationController
     @quote = Quote.new
   end
 
-  def edit
-    return if @quote
-
-    flash.now[:alert] = 'quote does not exist anymore'
-  end
-
   def create
     @quote = Quote.new(quote_params)
 
@@ -29,28 +23,20 @@ class QuotesController < ApplicationController
   end
 
   def update
-    if @quote
-      if @quote.update(quote_params)
-        flash.now[:notice] = 'quote updated successfully'
-      else
-        render :edit
-      end
+    if @quote.update(quote_params)
+      flash.now[:notice] = 'quote updated successfully'
     else
-      flash.now[:alert] = 'something went wrong.. please refresh and try again'
+      render :edit
     end
   end
 
   def destroy
-    flash.now[:notice] = 'quote removed successfully'
-    # simulate a delete
-    return unless @quote
-
     @quote.destroy
+    flash.now[:notice] = 'quote removed successfully'
   end
 
   def rate
-    if @quote
-      @quote.update(quote_params)
+    if @quote.update(quote_params)
       flash.now[:notice] = 'quote rated successfully'
     else
       flash.now[:alert] = 'something went wrong.. please refresh and try again'
@@ -64,11 +50,15 @@ class QuotesController < ApplicationController
     @content, @rating, @only_rated = *finder.applied_criteria
   end
 
+  def render *args
+    @quotes_count, @average_rating = *Quotes::Stats.calculate if Quotes::Stats.required?(action_name)
+    super
+  end
+
 private
 
   def load_quote
-    @quote_id = params[:id]
-    @quote = Quote.find_by(id: @quote_id)
+    @quote = Quote.find_by(id: params[:id])
   end
 
   def quote_params
