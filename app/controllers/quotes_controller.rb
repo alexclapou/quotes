@@ -20,7 +20,7 @@ class QuotesController < ApplicationController
 
     if @quote.save
       flash.now[:notice] = 'quote created succesfully'
-      @quotes = Quote.all if filters_applied?
+      @quotes = Quote.all
     else
       render :new
     end
