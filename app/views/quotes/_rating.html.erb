@@ -1,6 +1,6 @@
 <div class='rating absolute -bottom-2 flex flex-row-reverse'>
   <% (1..5).reverse_each do |rating| %>
-    <%= button_to rate_path(quote, quote:{rating:}), class:'block cursor-pointer' do %>
+    <%= button_to quote_path(quote, quote:{rating:}), class:'block cursor-pointer', method: :patch do %>
       <%= inline_svg_tag 'icons/star.svg', class: class_names('star fill-gray-50 w-6 text-gray-500', {'star fill-yellow-500': rating <= (quote.rating || 0)}) %>
     <% end %>
   <% end%>

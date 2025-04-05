@@ -28,7 +28,7 @@ module Quotes
 
       @rating = nil if @previous_rating == @rating && @rating.present?
 
-      @quotes = Quote.where(conditions.join(' AND '), *values)
+      Quote.where(conditions.join(' and '), *values)
     end
 
     def applied_criteria

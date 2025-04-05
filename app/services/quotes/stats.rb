@@ -23,7 +23,7 @@ module Quotes
     end
 
     def self.required?(action_name)
-      %w[index create destroy rate filter].include?(action_name)
+      %w[index update create destroy filter].include?(action_name)
     end
   end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuotesController < ApplicationController
-  before_action :load_quote, only: %w[show update edit destroy rate]
+  before_action :load_quote, only: %w[show update edit destroy]
 
   # root only!
   def index
@@ -25,22 +25,16 @@ class QuotesController < ApplicationController
   def update
     if @quote.update(quote_params)
       flash.now[:notice] = 'quote updated successfully'
-    else
+    elsif params[:rating].blank?
       render :edit
+    else
+      flash.now[:alert] = 'something went wrong.. please refresh and try again'
     end
   end
 
   def destroy
     @quote.destroy
     flash.now[:notice] = 'quote removed successfully'
-  end
-
-  def rate
-    if @quote.update(quote_params)
-      flash.now[:notice] = 'quote rated successfully'
-    else
-      flash.now[:alert] = 'something went wrong.. please refresh and try again'
-    end
   end
 
   def filter
