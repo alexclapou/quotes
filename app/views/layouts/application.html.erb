@@ -27,33 +27,14 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-
-    <style>
-      body{
-        color: #3a3a40;
-        caret-color: #3a3a40;
-      }
-      *:focus-visible {
-        outline: 1px solid #6a7282;
-      }
-      div:empty,
-      turbo-frame:empty {
-        display: none;
-      }
-
-      #quotes .empty:not(:nth-child(1)) {
-        display: none;
-      }
-    </style>
   </head>
 
-  <body class="max-w-3xl mx-auto flex flex-col gap-6 bg-white relative text-sm">
-    <div id='flash' class='w-full flex justify-center items-center absolute top-14'>
-    </div>
+  <body class="max-w-3xl mx-auto flex flex-col items-center justify-center gap-6 bg-white relative text-sm">
+    <%= render partial: 'layouts/flash' %>
 
     <%= render partial: 'layouts/header' %>
 
-    <main class="mx-4">
+    <main class="w-full mx-4">
       <%= yield %>
     </main>
 

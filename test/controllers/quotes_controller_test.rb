@@ -28,13 +28,17 @@ class QuotesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_should_update_quote
-    params = { quote: { content: 'updated' } }
+    params = { quote: { content: 'updated', rating: 4 } }
     new_content = params[:quote][:content]
     old_content = @quote.content
+    new_rating = params[:quote][:rating]
+    old_rating = @quote.rating
 
     assert_not_equal old_content, new_content
+    assert_not_equal old_rating, new_rating
     patch quote_url(@quote), params: params
     @quote.reload
     assert_equal new_content, @quote.content
+    assert_equal new_rating, @quote.rating
   end
 end

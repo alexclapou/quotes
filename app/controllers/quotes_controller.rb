@@ -1,20 +1,15 @@
 # frozen_string_literal: true
 
 class QuotesController < ApplicationController
-  before_action :load_quote, only: %w[show update edit destroy rate]
+  before_action :load_quote, only: %w[show update edit destroy]
 
+  # root only!
   def index
     @quotes = Quote.all
   end
 
   def new
     @quote = Quote.new
-  end
-
-  def edit
-    return if @quote
-
-    flash.now[:alert] = 'quote does not exist anymore'
   end
 
   def create
@@ -27,70 +22,37 @@ class QuotesController < ApplicationController
     end
   end
 
-  def destroy
-    flash.now[:notice] = 'quote removed successfully'
-    return unless @quote
-
-    @quote.destroy
-  end
-
   def update
-    if @quote
-      if @quote.update(quote_params)
-        flash.now[:notice] = 'quote updated successfully'
-      else
-        render :edit
-      end
+    if @quote.update(quote_params)
+      flash.now[:notice] = 'quote updated successfully'
+    elsif params[:rating].blank?
+      render :edit
     else
       flash.now[:alert] = 'something went wrong.. please refresh and try again'
     end
   end
 
-  def rate
-    if @quote
-      @quote.update(quote_params)
-      flash.now[:notice] = 'quote rated successfully'
-    else
-      flash.now[:alert] = 'something went wrong.. please refresh and try again'
-    end
+  def destroy
+    @quote.destroy
+    flash.now[:notice] = 'quote removed successfully'
   end
 
   def filter
-    content = params[:content]
-    rating = params[:rating]
-    previous_rating = params[:previous_rating]
-    @only_rated = params[:only_rated] == 'true'
+    finder = Quotes::Finder.new(params)
 
-    conditions = []
-    values = []
+    @quotes = finder.apply_criteria
+    @content, @rating, @only_rated = *finder.applied_criteria
+  end
 
-    if content.present?
-      conditions << 'content ilike ?'
-      values << "%#{content}%"
-      @content = content
-    end
-
-    if rating.present? && previous_rating != rating
-      conditions << 'rating = ?'
-      values << rating
-      @rating = rating.to_i
-    end
-
-    @quotes = Quote.where(conditions.join(' AND '), *values)
-    @quotes = @quotes.where.not(rating: nil) if @only_rated
-
-    flash[:notice] = if conditions.empty? && !@only_rated
-                       'filters cleared successfully'
-                     else
-                       'filters applied successfully'
-                     end
+  def render *args
+    @quotes_count, @average_rating = *Quotes::Stats.calculate if Quotes::Stats.required?(action_name)
+    super
   end
 
 private
 
   def load_quote
-    @quote_id = params[:id]
-    @quote = Quote.find_by(id: @quote_id)
+    @quote = Quote.find_by(id: params[:id])
   end
 
   def quote_params

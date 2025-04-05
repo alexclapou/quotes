@@ -2,6 +2,7 @@
   <div class="p-4 break-all w-full font-medium">
     <%= quote.content %>
   </div>
+
   <div class="flex gap-4 mx-4">
     <%= link_to edit_quote_path(quote), class: 'bg-gray-50 hover:bg-white hover:text-red-700 p-2 font-bold rounded-lg duration-200 hover:drop-shadow-sm drop-shadow-red-700 cursor-pointer' do %>
       <%= inline_svg_tag 'icons/edit.svg' %>
@@ -11,5 +12,5 @@
     <% end %>
   </div>
 
-  <%= render partial:'rating', locals: {quote:quote} %>
+  <%= render partial: 'rating', locals: {quote:quote} %>
 <% end %>

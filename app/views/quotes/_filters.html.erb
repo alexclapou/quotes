@@ -1,9 +1,8 @@
-<div class="flex flex-col flex-wrap gap-4 border border-gray-200 border-dashed rounded-lg p-4" data-controller='filters'>
-  <p class="font-medium text-lg">
-  filters & stats
-  </p>
-  <div class="flex flex-wrap items-center gap-4 justify-between">
-    <%= render partial: 'filters_frame' %>
-    <%= render partial: 'stats' %>
+<div class='flex flex-wrap gap-4 items-center'>
+  <%= render partial: 'content_filter' %>
+
+  <div class="flex items-center gap-4">
+    <%= render partial: 'rating_filter' %>
+    <%= button_to 'clear filters', filter_path, class:'cursor-pointer font-bold hover:underline' %>
   </div>
 </div>

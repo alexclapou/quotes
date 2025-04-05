@@ -1,10 +1,10 @@
-<%= turbo_frame_tag 'rating_filter' do %>
+<div>
   star rating
   <div class='flex flex-row-reverse'>
     <% (1..5).reverse_each do |rating| %>
-      <%= button_to filter_path, params: {rating: rating, content: @content, previous_rating: @rating, only_rated: @only_rated} do %>
-        <%= inline_svg_tag 'icons/star.svg', class:class_names('star w-6 cursor-pointer text-gray-500', {'fill-yellow-500': rating <= (@rating || 0) }) %>
+      <%= button_to filter_path, params: { rating: rating, content: @content, previous_rating: @rating, only_rated: @only_rated } do %>
+        <%= inline_svg_tag 'icons/star.svg', class: class_names('star w-6 cursor-pointer text-gray-500', {'fill-yellow-500': rating <= (@rating || 0) }) %>
       <% end %>
     <% end%>
   </div>
-<% end %>
+</div>
