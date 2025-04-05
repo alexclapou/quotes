@@ -17,6 +17,7 @@ class QuotesController < ApplicationController
 
     if @quote.save
       flash.now[:notice] = 'quote created succesfully'
+      filter # maybe this can be done better
     else
       render :new
     end

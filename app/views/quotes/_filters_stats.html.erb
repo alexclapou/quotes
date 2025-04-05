@@ -3,8 +3,16 @@
     filters & stats
   </p>
 
-  <div class="flex flex-wrap items-center gap-4 justify-between">
-    <%= render partial: 'filters' %>
-    <%= render partial: 'stats' %>
+  <div class="flex flex-wrap items-center justify-between">
+    <div class='flex flex-wrap gap-4 items-center'>
+      <%= render partial: 'content_filter' %>
+
+      <div class="flex gap-8 items-center">
+        <%= render partial: 'rating_filter' %>
+        <%= render partial: 'stats' %>
+      </div>
+    </div>
+
+    <%= button_to 'clear filters', filter_path, class:'cursor-pointer font-bold hover:underline' %>
   </div>
 <% end %>

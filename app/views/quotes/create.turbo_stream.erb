@@ -1,4 +1,4 @@
-<%= turbo_stream.prepend "quotes", @quote %>
+<%= turbo_stream.replace "quotes", render('quotes') %>
 <%= turbo_stream.update "new_quote", '' %>
 <%= turbo_stream.replace "filters_stats", render('filters_stats') %>
 <%= render_flash %>
