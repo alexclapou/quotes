@@ -1,4 +1,4 @@
-<div class="flex flex-col flex-wrap gap-4 border border-gray-200 border-dashed rounded-lg p-4" data-controller='filters'>
+<%= turbo_frame_tag 'filters_stats', class: 'flex flex-col flex-wrap gap-4 border border-gray-200 border-dashed rounded-lg p-4', data: { controller: 'filters' } do %>
   <p class="font-medium text-lg">
     filters & stats
   </p>
@@ -7,4 +7,4 @@
     <%= render partial: 'filters' %>
     <%= render partial: 'stats' %>
   </div>
-</div>
+<% end %>
