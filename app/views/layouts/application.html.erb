@@ -29,12 +29,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="max-w-3xl mx-auto flex flex-col items-center justify-center gap-6 bg-white relative text-sm">
+  <body class="max-w-3xl mx-auto flex flex-col items-center justify-center gap-6 bg-white relative text-sm min-h-screen">
     <%= render partial: 'layouts/flash' %>
 
     <%= render partial: 'layouts/header' %>
 
-    <main class="w-full mx-4">
+    <main class="w-full mx-4 flex-grow">
       <%= yield %>
     </main>
 
