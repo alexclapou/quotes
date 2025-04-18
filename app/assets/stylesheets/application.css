@@ -9,6 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+ html{
+  margin: 0 .5rem;
+ }
+ 
  body{
   font-family: "Archivo", serif;
   color: #3a3a40;
@@ -28,3 +32,11 @@ turbo-frame:empty {
   display: none;
 }
 
+.parallelogram {
+  background: #e67e22;
+  transform: skew(-20deg);
+}
+
+.parallelogram .content {
+  transform: skew(20deg);
+}
