@@ -31,12 +31,3 @@ turbo-frame:empty {
 #quotes .empty:not(:nth-child(1)) {
   display: none;
 }
-
-.parallelogram {
-  background: #e67e22;
-  transform: skew(-20deg);
-}
-
-.parallelogram .content {
-  transform: skew(20deg);
-}
