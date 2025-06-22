@@ -77,22 +77,24 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
+
 production:
   primary: &primary_production
     <<: *default
-    host: c4ggdlb6n7njd4.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com
-    database: d64c4cnsebkhn6
-    username: uaqio5e1phns2k
-    password: p266549da41087623617690dc37ec86bbdb9627327b37b056cb07585ff59e71df
+    host: caboose.proxy.rlwy.net
+    port: 59394
+    database: railway
+    username: postgres
+    password: AINDfZqGVKPryORoUgTOwfzbOIpEfDlT
   cache:
     <<: *primary_production
-    database: d64c4cnsebkhn6
+    database: quotes_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: d64c4cnsebkhn6
+    database: quotes_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: d64c4cnsebkhn6
+    database: quotes_production_cable
     migrations_paths: db/cable_migrate
